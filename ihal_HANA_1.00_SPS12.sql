@@ -40,6 +40,7 @@ WITH
 - 2016/12/02:  2.8 (NUM_SLAVES included)
 - 2017/12/01:  3.0 QPCM initial modification
 - 2018/04/03:  3.1 QPCM update
+- 2018/05/16:  3.2 QPCM update
 
 [INVOLVED TABLES]
 
@@ -1313,7 +1314,30 @@ SELECT 'ALL','indexserver.ini','sqlscript','typecheck_procedure_input_param',' '
 SELECT 'ALL','global.ini','memorymanager','statement_memory_limit',' ','<increase_by_1GB>','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.139,1,1,'2603589','oom;memory_leak',' ' from DUMMY UNION ALL
 SELECT 'ALL','global.ini','resource_tracking','enable_tracking',' ','off','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.139,1,1,'2603589','oom;memory_leak',' ' from DUMMY UNION ALL
 SELECT 'ALL','global.ini','resource_tracking','memory_tracking',' ','off','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.139,1,1,'2603589','oom;memory_leak',' ' from DUMMY UNION ALL
-    SELECT 'ALL',         'xsengine.ini',         'sql',                      'use_startup_timezone',                      ' ', 'false',                    '-- no recommendation --', '-- no recommendation --', '-- no recommendation --', 65,    68,  1,  1, '1932132', 'terminations',   ' ' FROM DUMMY 
+SELECT 'SDA','indexserver.ini','smart_data_access','remote_conn_idle_timeout’',' ','600','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2578523','SDA;tcp_timeout;connection_limit',' ' from DUMMY UNION ALL
+SELECT 'BW','indexserver.ini','session','socket_keepalive',' ','on','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2621464','tcp_timeout;BWoH;error_10107;error_10108;network',' ' from DUMMY UNION ALL
+SELECT 'BW','indexserver.ini','session','tcp_keepalive_time',' ','60','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2621464','tcp_timeout;BWoH;error_10107;error_10108;network',' ' from DUMMY UNION ALL
+SELECT 'BW','indexserver.ini','session',' tcp_keepalive_intvl',' ','1','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2621464','tcp_timeout;BWoH;error_10107;error_10108;network',' ' from DUMMY UNION ALL
+SELECT 'BW','indexserver.ini','session','tcp_keepalive_probes',' ','5','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2621464','tcp_timeout;BWoH;error_10107;error_10108;network',' ' from DUMMY UNION ALL
+SELECT 'ALL','global.ini','memorymanager','enable_sharing_allocator_for_implicit',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',122.16,-1,1,1,'2628153','OOM;memory_leak',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','load_trace','enable',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,121.999,1,1,'2340582','memory_leak',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','unload_trace','enable',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,121.999,1,1,'2340582','memory_leak',' ' from DUMMY UNION ALL
+SELECT 'SDI','indexserver.ini','session','max_statements_per_connection',' ','200000','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.099,1,1,'2464140','SDI;data_provisioning;connection_limit',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','session','fda_enable',' ','off','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2627679','FDA;workprocess;signal_11',' ' from DUMMY UNION ALL
+SELECT 'SDA','indexserver.ini','smart_data_access','enable_or_to_in',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',122.11,122.159,1,1,'2601496','SDA;virtual_table;ODBC',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','performance_analyzer','planviz_enable',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2637828','memory_leak;performance;planviz;trace',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_partnum',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_memuse',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_table_size_hosted',' ','true','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_rows',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_part_id',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_execution_time',' ','true','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_execution_count',' ','true','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_table_classification',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'MULTI','indexserver.ini','table_redist','balance_by_table_subclassification',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,122.989,1,1,'1958216','scale-out;redistribution;partitioning;performance',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','sqlscript','execution_monitoring_level',' ','0','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'1999998','lock_manager;performance;system_view;sqlscript',' ' from DUMMY UNION ALL
+SELECT 'ALL','indexserver.ini','sql','native_mixed_join_enabled',' ','false','-- no recommendation --','-- no recommendation --','-- no recommendation --',120,-1,1,1,'2624305','memory_leak;memory_management;OOM;join_engine;inverted_index',' ' from DUMMY UNION ALL    
+   SELECT 'ALL',         'xsengine.ini',         'sql',                      'use_startup_timezone',                      ' ', 'false',                    '-- no recommendation --', '-- no recommendation --', '-- no recommendation --', 65,    68,  1,  1, '1932132', 'terminations',   ' ' FROM DUMMY 
   ) P
 ),
 PARAMETER_SETTINGS AS
